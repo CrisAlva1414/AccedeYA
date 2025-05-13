@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import PlaceDetails, { Place } from "@/components/PlaceDetails";
 import AccessibilityIcon from "@/components/AccessibilityIcon";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import { Icon } from 'leaflet';
 
 // Sample offline map data
 const places: Place[] = [
@@ -169,14 +169,40 @@ const places: Place[] = [
   }
 ];
 
-// Marker positions for the demo map (percentages of map width/height)
-const markers: Array<{ id: string, x: number, y: number }> = [
-  { id: "1", x: 49, y: 45 },
-  { id: "2", x: 22, y: 30 },
-  { id: "3", x: 75, y: 60 },
-  { id: "4", x: 35, y: 70 },
-  { id: "5", x: 65, y: 25 },
+// Actualizar los IDs de los markers para que coincidan con los places
+const markers: Array<{ id: string, lat: number, lng: number }> = [
+  { id: "6", lat: -33.486901, lng: -70.659897 }, // Cesfam San Miguel Sur
+  { id: "7", lat: -33.488245, lng: -70.661234 }, // Plaza Arzobispo Valdivieso
+  { id: "8", lat: -33.485678, lng: -70.658123 }, // Biblioteca Pública
+  { id: "9", lat: -33.487890, lng: -70.660456 }, // Estación Metro
+  { id: "10", lat: -33.484567, lng: -70.657891 }, // Multicancha
+  { id: "11", lat: -33.489123, lng: -70.662345 }, // Centro Cultural
+  { id: "12", lat: -33.485234, lng: -70.659876 }, // Farmacia Comunal
+  { id: "13", lat: -33.488765, lng: -70.661098 }, // Junta de Vecinos
+  { id: "14", lat: -33.486543, lng: -70.658765 }, // Ferretería
+  { id: "15", lat: -33.487654, lng: -70.660987 }  // Escuela Básica
 ];
+
+// Crear iconos personalizados según el nivel de accesibilidad
+const getMarkerIcon = (accessibilityLevel: string) => {
+  const color = {
+    high: '#22c55e',    // green-500
+    medium: '#eab308',  // yellow-500
+    low: '#f97316',     // orange-500
+    none: '#ef4444'     // red-500
+  }[accessibilityLevel] || '#ef4444';
+
+  return new Icon({
+    iconUrl: `data:image/svg+xml;base64,${btoa(`
+      <svg width="25" height="41" viewBox="0 0 25 41" xmlns="http://www.w3.org/2000/svg">
+        <path fill="${color}" d="M12.5 0C5.596 0 0 5.596 0 12.5c0 1.886.43 3.766 1.25 5.468l11.25 22.5L23.75 17.968c.82-1.702 1.25-3.582 1.25-5.468C25 5.596 19.404 0 12.5 0z"/>
+      </svg>
+    `)}`,
+    iconSize: [25, 41],
+    iconAnchor: [12.5, 41],
+    popupAnchor: [0, -41]
+  });
+};
 
 const Map = () => {
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
@@ -199,7 +225,7 @@ const Map = () => {
     <Layout className="fixed inset-0">
       <div className="absolute inset-0">
         {/* Map container */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-10">
           <MapContainer 
             center={[-33.486901154843515, -70.65989729283065]} 
             zoom={16} 
@@ -218,46 +244,55 @@ const Map = () => {
               const place = places.find(p => p.id === marker.id);
               if (!place) return null;
               
-              // Calcular la posición real basada en los porcentajes x,y
-              const lat = -33.45 + (marker.y - 50) * 0.001; // ajusta el factor 0.001 según necesites
-              const lng = -70.654 + (marker.x - 50) * 0.001;
-              
               return (
-                <Marker key={marker.id} position={[lat, lng]}>
-                  <Popup>{place.name}</Popup>
+                <Marker 
+                  key={marker.id} 
+                  position={[marker.lat, marker.lng]}
+                  icon={getMarkerIcon(place.accessibilityLevel)}
+                  eventHandlers={{
+                    click: () => handleMarkerClick(marker.id)
+                  }}
+                  // Ajustar z-index para que esté por encima del mapa pero debajo de los controles
+                  zIndexOffset={100}
+                >
+                  <Popup>
+                    <div className="text-sm">
+                      <p className="font-medium">{place.name}</p>
+                      <p className="text-gray-600">{place.description}</p>
+                    </div>
+                  </Popup>
                 </Marker>
               );
             })}
           </MapContainer>
         </div>
         
-        {/* Rest of the components */}
-        {/* Map Legend con z-index más alto */}
+        {/* Legend */}
         {showLegend && (
           <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg max-w-xs overflow-hidden">
             <div className="text-sm font-medium mb-2">Niveles de Accesibilidad</div>
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-green-50 p-2 rounded-md">
                 <AccessibilityIcon level="high" size="sm" />
-                <span className="text-xs">Alto</span>
+                <span className="text-xs text-green-700 font-medium">Alto</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-yellow-50 p-2 rounded-md">
                 <AccessibilityIcon level="medium" size="sm" />
-                <span className="text-xs">Medio</span>
+                <span className="text-xs text-yellow-700 font-medium">Medio</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-orange-50 p-2 rounded-md">
                 <AccessibilityIcon level="low" size="sm" />
-                <span className="text-xs">Bajo</span>
+                <span className="text-xs text-orange-700 font-medium">Bajo</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-red-50 p-2 rounded-md">
                 <AccessibilityIcon level="none" size="sm" />
-                <span className="text-xs">No Accesible</span>
+                <span className="text-xs text-red-700 font-medium">No Accesible</span>
               </div>
             </div>
           </div>
         )}
         
-        {/* Floating map controls con z-index igual al legend */}
+        {/* Controls */}
         <div className="absolute bottom-4 right-4 z-50 flex flex-col gap-2 overflow-hidden">
           <button 
             className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-accede-purple"
@@ -282,9 +317,9 @@ const Map = () => {
           </button>
         </div>
         
-        {/* Modal con z-index más alto que todos */}
+        {/* Modal */}
         {showDetails && selectedPlace && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-[60] flex items-center justify-center p-4 overflow-hidden">
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4 overflow-hidden">
             <PlaceDetails place={selectedPlace} onClose={handleCloseDetails} />
           </div>
         )}
