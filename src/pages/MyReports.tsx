@@ -32,15 +32,6 @@ const initialReports: Report[] = [
     status: "pending",
     hasPhoto: false
   },
-  {
-    id: "r3",
-    location: "Parque Municipal",
-    issues: ["Puertas angostas"],
-    otherIssue: "Senderos de tierra muy difíciles para sillas de ruedas",
-    date: "28/03/2025",
-    status: "received",
-    hasPhoto: true
-  }
 ];
 
 const MyReports = () => {
