@@ -11,9 +11,9 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
   const isHome = location.pathname === "/";
 
   return (
-    <div className={`flex flex-col h-dvh min-h-0 bg-accede-light ${className}`}>
+    <div className={`fixed inset-0 flex flex-col bg-accede-light ${className}`}>
       {!isHome && (
-        <header className="sticky top-0 z-10 bg-white shadow-sm py-3 px-4">
+        <header className="flex-none bg-white shadow-sm py-3 px-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <span className="text-xl font-bold text-accede-purple">AccedeYA!</span>
@@ -61,11 +61,11 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
           </div>
         </header>
       )}
-      <main className="flex-grow flex-shrink min-h-0 overflow-hidden w-full">
+      <main className="flex-1 overflow-hidden w-full relative">
         {children}
       </main>
       {!isHome && (
-        <footer className="bg-white py-3 px-4 border-t">
+        <footer className="flex-none bg-white py-3 px-4 border-t">
           <div className="flex justify-center">
             <Link
               to="/"

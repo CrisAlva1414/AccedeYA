@@ -8,92 +8,165 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // Sample offline map data
 const places: Place[] = [
   {
-    id: "1",
-    name: "Plaza de Armas",
-    accessibilityLevel: "high",
-    description: "Plaza céntrica con buenas rampas de acceso en todas las esquinas y bancas accesibles.",
-    imageUrl: "https://images.unsplash.com/photo-1466442929976-97f336a657be?auto=format&fit=crop&w=600&h=400&q=80",
-    reviews: [
+    "id": "6",
+    "name": "Cesfam San Miguel Sur",
+    "accessibilityLevel": "high",
+    "description": "Centro de salud con rampas de acceso, ascensor interno y baños adaptados.",
+    "imageUrl": "https://images.unsplash.com/photo-1588776814546-ec7bb3b0b913?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
       {
-        id: "r1",
-        userName: "María G.",
-        date: "12/04/2025",
-        text: "Excelente accesibilidad. Las rampas están en buenas condiciones y hay espacios amplios para circular.",
-        rating: 5
-      },
-      {
-        id: "r2",
-        userName: "Carlos L.",
-        date: "28/03/2025",
-        text: "Los baños públicos también son accesibles, lo cual es un plus.",
-        rating: 4
+        "id": "r7",
+        "userName": "Andrea H.",
+        "date": "06/05/2025",
+        "text": "Todo el edificio es accesible. El personal también es muy considerado.",
+        "rating": 5
       }
     ]
   },
   {
-    id: "2",
-    name: "Estación Central",
-    accessibilityLevel: "medium",
-    description: "Estación con accesibilidad parcial. Tiene rampas pero algunas están en mal estado.",
-    imageUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&h=400&q=80",
-    reviews: [
+    "id": "7",
+    "name": "Plaza Arzobispo Valdivieso",
+    "accessibilityLevel": "medium",
+    "description": "Espacio verde con acceso desde dos esquinas. Falta pavimentación interior adaptada.",
+    "imageUrl": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
       {
-        id: "r3",
-        userName: "Pablo R.",
-        date: "05/04/2025",
-        text: "Las rampas existen pero algunas tienen una inclinación excesiva. Se necesita ayuda.",
-        rating: 3
+        "id": "r8",
+        "userName": "Sebastián R.",
+        "date": "04/05/2025",
+        "text": "Buena entrada, pero difícil de transitar con silla por la gravilla.",
+        "rating": 3
       }
     ]
   },
   {
-    id: "3",
-    name: "Universidad Central",
-    accessibilityLevel: "low",
-    description: "Edificio principal con pocos accesos adaptados. Solo una entrada cuenta con rampa.",
-    imageUrl: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=600&h=400&q=80",
-    reviews: [
+    "id": "8",
+    "name": "Biblioteca Pública Pedro Aguirre Cerda",
+    "accessibilityLevel": "high",
+    "description": "Entrada sin escalones, baño accesible, ascensor al segundo piso.",
+    "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
       {
-        id: "r4",
-        userName: "Laura M.",
-        date: "01/04/2025",
-        text: "Difícil de acceder. Solo hay una rampa en la entrada trasera y está lejos de todo.",
-        rating: 2
+        "id": "r9",
+        "userName": "Rocío V.",
+        "date": "01/05/2025",
+        "text": "Muy acogedora y fácil de acceder. Hasta hay sillas adaptadas.",
+        "rating": 5
       }
     ]
   },
   {
-    id: "4",
-    name: "Centro Comercial Norte",
-    accessibilityLevel: "high",
-    description: "Centro comercial moderno con excelente accesibilidad en todas las áreas.",
-    imageUrl: "https://images.unsplash.com/photo-1524230572899-a752b3835840?auto=format&fit=crop&w=600&h=400&q=80",
-    reviews: [
+    "id": "9",
+    "name": "Estación Metro El Llano",
+    "accessibilityLevel": "medium",
+    "description": "Acceso con ascensor, pero suele estar en mantención. Torniquetes angostos.",
+    "imageUrl": "https://images.unsplash.com/photo-1603201667140-b42d5d57f0b6?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
       {
-        id: "r5",
-        userName: "Elena P.",
-        date: "10/04/2025",
-        text: "Muy buena accesibilidad. Ascensores amplios y baños adaptados en todos los pisos.",
-        rating: 5
+        "id": "r10",
+        "userName": "Fernando S.",
+        "date": "30/04/2025",
+        "text": "Buena si funciona el ascensor, pero si no, es imposible bajar.",
+        "rating": 3
       }
     ]
   },
   {
-    id: "5",
-    name: "Parque Municipal",
-    accessibilityLevel: "none",
-    description: "Parque sin accesos adaptados. Solo escaleras para entrar y terreno irregular.",
-    imageUrl: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&h=400&q=80",
-    reviews: [
+    "id": "10",
+    "name": "Multicancha Recreativa PAC",
+    "accessibilityLevel": "low",
+    "description": "Ingreso por tierra y sin senderos pavimentados. Sin baños ni zonas adaptadas.",
+    "imageUrl": "https://images.unsplash.com/photo-1589927986089-35812388d1b2?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
       {
-        id: "r6",
-        userName: "Ricardo J.",
-        date: "15/03/2025",
-        text: "Imposible acceder con silla de ruedas. Solo hay escaleras y caminos de tierra.",
-        rating: 1
+        "id": "r11",
+        "userName": "Valentina G.",
+        "date": "02/05/2025",
+        "text": "No hay acceso para sillas. Todo es pasto y tierra suelta.",
+        "rating": 2
       }
     ]
   },
+  {
+    "id": "11",
+    "name": "Centro Cultural PAC",
+    "accessibilityLevel": "high",
+    "description": "Entrada nivelada, baños adaptados, señalética visual clara.",
+    "imageUrl": "https://images.unsplash.com/photo-1611971261269-b92fae054f25?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
+      {
+        "id": "r12",
+        "userName": "Camilo F.",
+        "date": "29/04/2025",
+        "text": "Excelente espacio, súper inclusivo.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Farmacia Comunal",
+    "accessibilityLevel": "medium",
+    "description": "Cuenta con rampa pero la puerta es angosta. Mostrador alto.",
+    "imageUrl": "https://images.unsplash.com/photo-1588776814236-7e0f1c6eabe9?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
+      {
+        "id": "r13",
+        "userName": "Isabel T.",
+        "date": "03/05/2025",
+        "text": "Puedo entrar, pero necesito ayuda para alcanzar productos o pagar.",
+        "rating": 3
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Junta de Vecinos San Joaquín",
+    "accessibilityLevel": "low",
+    "description": "Solo escalera en el ingreso, sin baranda ni señalética.",
+    "imageUrl": "https://images.unsplash.com/photo-1584899491602-3d097217886d?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
+      {
+        "id": "r14",
+        "userName": "Cristina M.",
+        "date": "01/05/2025",
+        "text": "Tuve que esperar afuera. No hay forma de subir en silla.",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Ferretería El Tronco",
+    "accessibilityLevel": "none",
+    "description": "Escalón alto en la entrada, pasillos estrechos, sin atención prioritaria.",
+    "imageUrl": "https://images.unsplash.com/photo-1560180474-e8563fd75bab?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
+      {
+        "id": "r15",
+        "userName": "Gabriel N.",
+        "date": "30/04/2025",
+        "text": "Nada accesible. Ni siquiera se puede entrar solo.",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Escuela Básica D-608",
+    "accessibilityLevel": "medium",
+    "description": "Entrada con rampa pero con pendiente pronunciada. Baños adaptados en primer piso.",
+    "imageUrl": "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&h=400&q=80",
+    "reviews": [
+      {
+        "id": "r16",
+        "userName": "Marcela Q.",
+        "date": "02/05/2025",
+        "text": "Pude acceder pero con esfuerzo. Falta un ascensor.",
+        "rating": 3
+      }
+    ]
+  }
 ];
 
 // Marker positions for the demo map (percentages of map width/height)
@@ -123,10 +196,10 @@ const Map = () => {
   };
 
   return (
-    <Layout className="h-screen w-screen overflow-hidden m-0 p-0">
-      <div className="relative w-full h-full m-0 p-0 overflow-hidden">
-        {/* Map container con z-index bajo */}
-        <div className="absolute inset-0 m-0 p-0 z-0 h-full w-full overflow-hidden">
+    <Layout className="fixed inset-0">
+      <div className="absolute inset-0">
+        {/* Map container */}
+        <div className="absolute inset-0 z-0">
           <MapContainer 
             center={[-33.486901154843515, -70.65989729283065]} 
             zoom={16} 
@@ -158,6 +231,7 @@ const Map = () => {
           </MapContainer>
         </div>
         
+        {/* Rest of the components */}
         {/* Map Legend con z-index más alto */}
         {showLegend && (
           <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg max-w-xs overflow-hidden">
